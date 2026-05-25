@@ -1,0 +1,29 @@
+</main>
+
+<footer class="footer-fofo">
+    <div class="footer-content">
+        <p>✨ Feito com <span style="color:#F24472;">♥</span> ✨</p>
+        <div class="social-icons">
+            <span>📘</span>
+            <span>📷</span>
+            <span>🐦</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Esconde/mostra navbar ao rolar
+    let lastScroll = 0;
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > lastScroll && currentScroll > 80) {
+            navbar.classList.add('hidden');
+        } else {
+            navbar.classList.remove('hidden');
+        }
+        lastScroll = currentScroll;
+    });
+</script>
+</body>
+</html>

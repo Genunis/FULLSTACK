@@ -1,0 +1,18 @@
+<%
+  title = "Início - Meu Site";
+%>
+<%- include('partials/header') %>
+
+<section id="Sobre">
+    <h1>Bem-vindo ao sistema de cadastros</h1>
+    <p>Gerencie até <strong>10 usuários</strong> e <strong>10 produtos</strong> com esta interface super fofa.</p>
+    <p>📊 Status atual: <strong><%= userCount %></strong> / 10 usuários | <strong><%= productCount %></strong> / 10 produtos.</p>
+    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+        <a href="/lab11/usuarios/cadastrar" class="btn-link">➕ Novo Usuário</a>
+        <a href="/lab11/produtos/cadastrar" class="btn-link">➕ Novo Produto</a>
+    </div>
+</section>
+
+
+
+<%- include('partials/footer') %>

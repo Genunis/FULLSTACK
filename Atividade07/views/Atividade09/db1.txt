@@ -1,0 +1,19 @@
+const mongoose = require('mongoose');
+
+// COLOQUE A SUA STRING DE CONEXÃO AQUI
+const uri = 'mongodb+srv://jeniffernicolly9_db_user:jn78133@blogdb.rmjo4et.mongodb.net/blogdb?retryWrites=true&w=majority';
+
+mongoose.connect(uri)
+  .then(() => console.log('Conectado ao MongoDB Atlas!'.green))
+  .catch(err => console.error('Erro na conexão:'.red, err.message));
+
+// Schema do post
+const postSchema = new mongoose.Schema({
+  titulo:   { type: String, required: true },
+  resumo:   { type: String, default: '' },
+  conteudo: { type: String, required: true },
+  criado_em: { type: Date, default: Date.now }
+});
+
+const Post = mongoose.model('Post', postSchema);
+module.exports = Post;

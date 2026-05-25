@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerência de Carros</title>
+  <link rel="stylesheet" href="./../Atividade10/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <a class="btn" href="/lab10/carros">Lista</a>
+    <div class="logout"><a class="btn" href="/lab10/usuarios/logout">Sair</a></div>
+    <h1>🔧 Gerência de Carros</h1>
+    <p>Bem-vindo(a), <strong><%= usuario.nome %></strong>!</p>
+    
+    <div class="form-cadastro">
+      <h2>Cadastrar Novo Carro</h2>
+      <form action="/lab10/carros/gerencia/cadastrar" method="POST">
+        <input type="text" name="marca" placeholder="Marca" required>
+        <input type="text" name="modelo" placeholder="Modelo" required>
+        <input type="number" name="ano" placeholder="Ano" required>
+        <input type="number" name="qtde_disponivel" placeholder="Quantidade" required>
+        <button type="submit" class="btn">Cadastrar</button>
+      </form>
+    </div>
+
+    <h2>Todos os Carros</h2>
+    <table>
+      <thead><tr><th>Marca</th><th>Modelo</th><th>Ano</th><th>Quantidade</th><th>Ações</th></tr></thead>
+      <tbody>
+        <% carros.forEach(carro => { %>
+          <tr>
+            <form action="/lab10/carros/gerencia/atualizar/<%= carro._id %>" method="POST">
+              <td><input type="text" name="marca" value="<%= carro.marca %>" ></td>
+              <td><input type="text" name="modelo" value="<%= carro.modelo %>" ></td>
+              <td><input type="number" name="ano" value="<%= carro.ano %>" "></td>
+              <td><input type="number" name="qtde_disponivel" value="<%= carro.qtde_disponivel %>" ></td>
+              <td>
+                <button type="submit" class="btn">Atualizar</button>
+              </form>
+              <form action="/lab10/carros/gerencia/remover/<%= carro._id %>" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-remover">Remover</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

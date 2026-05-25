@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Carros Disponíveis</title>
+  <link rel="stylesheet" href="/Atividade10/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🏎️ Carros à Venda</h1>
+
+    <div style="text-align:center; margin-bottom:20px;">
+      <a class="btn" href="/lab10/usuarios/login">Área Restrita</a>
+      <a class="btn" href="/lab10/Atividade02/Projects.html">Projetos</a>
+    </div>
+
+    <% if (carros && carros.length > 0) { %>
+      <% carros.forEach(carro => { %>
+        <div class="carro-card">
+          <div class="carro-info">
+            <h2><%= carro.marca %> <%= carro.modelo %></h2>
+            <div class="carro-especificacoes">
+              <div class="spec-item">
+                <span class="label">Ano</span>
+                <span class="valor ano-valor"><%= carro.ano %></span>
+              </div>
+              <div class="spec-item">
+                <span class="label">Estoque</span>
+                <span class="valor qtde-valor 
+                  <%= carro.qtde_disponivel === 0 ? 'esgotado' : '' %>
+                  <%= carro.qtde_disponivel > 0 && carro.qtde_disponivel <= 2 ? 'baixo' : '' %>">
+                  <%= carro.qtde_disponivel %>
+                </span>
+              </div>
+            </div>
+            <% if (carro.qtde_disponivel === 0) { %>
+              <span class="esgotado-tag">Esgotado</span>
+            <% } %>
+          </div>
+          <form action="/lab10/carros/vender/<%= carro._id %>" method="POST" style="display:inline;">
+            <button type="submit" class="btn-vender" <%= carro.qtde_disponivel === 0 ? 'disabled' : '' %>>
+              Vender
+            </button>
+          </form>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p style="text-align:center;">Nenhum carro disponível no momento.</p>
+    <% } %>
+  </div>
+</body>
+</html>

@@ -1,0 +1,215 @@
+require('colors');
+var http = require('http');
+var express = require('express');
+var path = require('path');
+var session = require('express-session');
+
+var app = express();
+
+// Configuração do body parser e sessão
+app.use(express.urlencoded({ extended: true }));
+app.use(session({
+  secret: 'seuSegredoSuperFofo',
+  resave: false,
+  saveUninitialized: false
+}));
+
+// Template engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+app.use(express.static(path.join(__dirname, '..')));
+
+const { Post, Usuario, Carro } = require('./db');
+
+var usuariosCadastrados = []; // array em memória para o LAB 8 (não interfere)
+
+app.get('/', (req, res) => res.redirect('/Atividade02/Projects.html'));
+
+app.get('/cadastra', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'Atividade08', 'Cadastro.html'));
+});
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'Atividade08', 'Login.html'));
+});
+app.post('/cadastra', (req, res) => {
+  var { nome, usuario, senha } = req.body;
+  usuariosCadastrados.push({ nome, usuario, senha });
+  console.log(`Novo cadastro: ${usuario}`.green);
+  res.redirect('/login');
+});
+app.post('/login', (req, res) => {
+  var { usuario, senha } = req.body;
+  var user = usuariosCadastrados.find(u => u.usuario === usuario && u.senha === senha);
+  res.render('resposta', {
+    status: user ? 'sucesso' : 'erro',
+    mensagem: user ? 'Login efetuado com sucesso!' : 'Usuário ou senha inválidos.',
+    usuario: user ? user.nome : usuario
+  });
+});
+
+app.get('/blog', async (req, res) => {
+  try {
+    const posts = await Post.find().sort({ criado_em: -1 }).lean();
+    res.render('blog', { posts });
+  } catch (err) {
+    console.error('Erro ao buscar posts:'.red, err.message);
+    res.status(500).send('Erro no servidor');
+  }
+});
+app.get('/cadastrar_post', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'Atividade09', 'cadastrar_post.html'));
+});
+app.post('/cadastrar_post', async (req, res) => {
+  const { titulo, resumo, conteudo } = req.body;
+  try {
+    const novoPost = new Post({ titulo, resumo, conteudo });
+    await novoPost.save();
+    console.log('Post salvo no MongoDB:'.green, titulo);
+    res.redirect('/blog');
+  } catch (err) {
+    console.error('Erro ao salvar post:'.red, err.message);
+    res.status(500).send('Erro ao cadastrar');
+  }
+});
+
+// ---------- SISTEMA DE CARROS ----------
+
+// Middleware de autenticação para gerência
+function verificarLogin(req, res, next) {
+  if (req.session && req.session.usuario) {
+    return next();
+  }
+  res.redirect('/usuarios/login');
+}
+
+// Página pública de listagem de carros (com opção de vender)
+app.get('/carros', async (req, res) => {
+  try {
+    const carros = await Carro.find().lean();
+    res.render('carros', { carros });
+  } catch (err) {
+    console.error('Erro ao listar carros:'.red, err.message);
+    res.status(500).send('Erro no servidor');
+  }
+});
+
+// Vender carro (decrementar quantidade)
+app.post('/carros/vender/:id', async (req, res) => {
+  try {
+    const carro = await Carro.findById(req.params.id);
+    if (!carro) return res.status(404).send('Carro não encontrado');
+    if (carro.qtde_disponivel > 0) {
+      carro.qtde_disponivel -= 1;
+      await carro.save();
+    }
+    res.redirect('/carros');
+  } catch (err) {
+    console.error('Erro ao vender carro:'.red, err.message);
+    res.status(500).send('Erro ao processar venda');
+  }
+});
+
+// Páginas de usuário (cadastro e login para o sistema de carros)
+app.get('/usuarios/cadastro', (req, res) => {
+  res.render('cadastro_usuario', { erro: null });
+});
+
+app.post('/usuarios/cadastro', async (req, res) => {
+  const { nome, login, senha } = req.body;
+  try {
+    const usuario = new Usuario({ nome, login, senha });
+    await usuario.save();
+    console.log(`Novo usuário cadastrado: ${login}`.green);
+    res.redirect('/usuarios/login');
+  } catch (err) {
+    if (err.code === 11000) {
+      res.render('cadastro_usuario', { erro: 'Login já existente.' });
+    } else {
+      console.error('Erro ao cadastrar usuário:'.red, err.message);
+      res.status(500).send('Erro no servidor');
+    }
+  }
+});
+
+app.get('/usuarios/login', (req, res) => {
+  res.render('login_usuario', { erro: null });
+});
+
+app.post('/usuarios/login', async (req, res) => {
+  const { login, senha } = req.body;
+  try {
+    const usuario = await Usuario.findOne({ login, senha });
+    if (usuario) {
+      req.session.usuario = usuario;
+      res.redirect('/carros/gerencia');
+    } else {
+      res.render('login_usuario', { erro: 'Login ou senha inválidos.' });
+    }
+  } catch (err) {
+    console.error('Erro no login:'.red, err.message);
+    res.status(500).send('Erro no servidor');
+  }
+});
+
+app.get('/usuarios/logout', (req, res) => {
+  req.session.destroy();
+  res.redirect('/carros');
+});
+
+// Páginas de gerência (protegidas)
+app.get('/carros/gerencia', verificarLogin, async (req, res) => {
+  try {
+    const carros = await Carro.find().lean();
+    res.render('gerencia', { carros, usuario: req.session.usuario });
+  } catch (err) {
+    console.error('Erro na gerência:'.red, err.message);
+    res.status(500).send('Erro no servidor');
+  }
+});
+
+// Cadastrar novo carro
+app.post('/carros/gerencia/cadastrar', verificarLogin, async (req, res) => {
+  const { marca, modelo, ano, qtde_disponivel } = req.body;
+  try {
+    const novoCarro = new Carro({ marca, modelo, ano, qtde_disponivel });
+    await novoCarro.save();
+    console.log('Novo carro cadastrado:'.green, marca, modelo);
+    res.redirect('/carros/gerencia');
+  } catch (err) {
+    console.error('Erro ao cadastrar carro:'.red, err.message);
+    res.status(500).send('Erro ao cadastrar');
+  }
+});
+
+// Remover carro
+app.post('/carros/gerencia/remover/:id', verificarLogin, async (req, res) => {
+  try {
+    await Carro.findByIdAndDelete(req.params.id);
+    console.log('Carro removido.'.red);
+    res.redirect('/carros/gerencia');
+  } catch (err) {
+    console.error('Erro ao remover carro:'.red, err.message);
+    res.status(500).send('Erro ao remover');
+  }
+});
+
+// Atualizar carro (formulário via POST com campos)
+app.post('/carros/gerencia/atualizar/:id', verificarLogin, async (req, res) => {
+  const { marca, modelo, ano, qtde_disponivel } = req.body;
+  try {
+    await Carro.findByIdAndUpdate(req.params.id, { marca, modelo, ano, qtde_disponivel });
+    console.log('Carro atualizado.'.green);
+    res.redirect('/carros/gerencia');
+  } catch (err) {
+    console.error('Erro ao atualizar carro:'.red, err.message);
+    res.status(500).send('Erro ao atualizar');
+  }
+});
+
+
+
+var server = http.createServer(app);
+server.listen(80, '0.0.0.0', () => {
+  console.log("servidor rodando...".rainbow);
+});

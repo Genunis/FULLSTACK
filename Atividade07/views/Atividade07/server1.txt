@@ -1,0 +1,17 @@
+const express = require('express');
+const path = require('path');
+const app = express();
+
+const PORT = 80;
+
+const raizRepositorio = path.join(__dirname, '..');
+app.use(express.static(raizRepositorio));
+
+
+app.get('/', (req, res) => {
+  res.redirect('/Atividade01/index.html');
+});
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
+});

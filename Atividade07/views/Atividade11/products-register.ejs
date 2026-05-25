@@ -1,0 +1,38 @@
+<%
+  title = "Cadastrar Produto";
+%>
+<%- include('partials/header') %>
+
+<div class="projects-card">
+    <h2 class="projects-title">
+        <span>🏷️</span><span>P</span><span>r</span><span>o</span><span>d</span><span>u</span><span>t</span><span>o</span><span> </span><span>✨</span>
+    </h2>
+    <p><strong>Produtos cadastrados:</strong> <%= count %> / <%= max %></p>
+    
+    <% if (error) { %>
+        <div style="background:#ffe0e7; border-left:5px solid #F24472; padding:10px; margin-bottom:20px; border-radius:12px;">
+            <span style="color:#b33;"><%= error %></span>
+        </div>
+    <% } %>
+
+    <form action="/lab11/produtos/cadastrar" method="POST" style="display:flex; flex-direction:column; gap:15px;">
+        <div>
+            <label for="name">Nome do produto:</label>
+            <input type="text" name="name" id="name" value="<%= name %>" required style="width:100%; padding:12px; border-radius:30px; border:2px solid #A2CDF2;">
+        </div>
+        <div>
+            <label for="price">Preço (R$):</label>
+            <input type="number" step="0.01" name="price" id="price" value="<%= price %>" required style="width:100%; padding:12px; border-radius:30px; border:2px solid #A2CDF2;">
+        </div>
+        <div>
+            <label for="description">Descrição (opcional):</label>
+            <textarea name="description" id="description" rows="3" style="width:100%; padding:12px; border-radius:30px; border:2px solid #A2CDF2; font-family:inherit;"><%= description %></textarea>
+        </div>
+        <button type="submit" class="btn-link" style="align-self:center; background:#F24472; color:white; border:none; padding:12px 30px;">💰 Cadastrar Produto</button>
+    </form>
+    <div style="text-align:center; margin-top:20px;">
+        <a href="/lab11/produtos" class="btn-link">📦 Ver lista de produtos</a>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

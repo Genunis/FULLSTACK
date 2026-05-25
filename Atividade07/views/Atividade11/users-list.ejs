@@ -1,0 +1,44 @@
+<%
+  title = "Lista de Usuários";
+%>
+<%- include('partials/header') %>
+
+<div class="projects-card">
+    <h2 class="projects-title">
+        <span>👥</span><span>U</span><span>s</span><span>u</span><span>á</span><span>r</span><span>i</span><span>o</span><span>s</span>
+    </h2>
+    <% if (showSuccess) { %>
+        <div style="background:#d4edda; border-left:5px solid #28a745; padding:10px; margin-bottom:20px; border-radius:12px;">
+            ✅ Usuário cadastrado com sucesso!
+        </div>
+    <% } %>
+    
+    <p><strong><%= count %></strong> de <%= max %> usuários cadastrados.</p>
+    
+    <% if (users.length === 0) { %>
+        <p style="text-align:center;">✨ Nenhum usuário cadastrado ainda. <a href="/lab11/usuarios/cadastrar">Cadastre o primeiro</a> ✨</p>
+    <% } else { %>
+        <div class="table-container">
+            <table class="projects-table">
+                <thead>
+                    <tr><th>ID</th><th>Nome</th><th>E-mail</th><th>Data de cadastro</th></tr>
+                </thead>
+                <tbody>
+                    <% users.forEach(user => { %>
+                        <tr>
+                            <td><%= user.id %></td>
+                            <td><%= user.name %></td>
+                            <td><%= user.email %></td>
+                            <td><%= user.registeredAt %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
+    <div style="text-align:center; margin-top:25px;">
+        <a href="/lab11/usuarios/cadastrar" class="btn-link">➕ Novo Usuário</a>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

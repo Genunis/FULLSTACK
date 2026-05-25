@@ -1,0 +1,76 @@
+require('colors');
+var http = require('http');
+var express = require('express');
+var path = require('path');
+
+var app = express();
+
+app.use(express.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, '..')));
+
+const Post = require('./db');
+
+var usuariosCadastrados = [];
+
+app.get('/', (req, res) => res.redirect('/Atividade01/index.html'));
+
+app.get('/cadastra', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'Atividade08', 'Cadastro.html'));
+});
+
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'Atividade08', 'Login.html'));
+});
+
+app.post('/cadastra', (req, res) => {
+  var { nome, usuario, senha } = req.body;
+  usuariosCadastrados.push({ nome, usuario, senha });
+  console.log(`Novo cadastro: ${usuario}`.green);
+  res.redirect('/login');
+});
+
+app.post('/login', (req, res) => {
+  var { usuario, senha } = req.body;
+  var user = usuariosCadastrados.find(u => u.usuario === usuario && u.senha === senha);
+  res.render('resposta', {
+    status: user ? 'sucesso' : 'erro',
+    mensagem: user ? 'Login efetuado com sucesso!' : 'Usuário ou senha inválidos.',
+    usuario: user ? user.nome : usuario
+  });
+});
+
+
+app.get('/blog', async (req, res) => {
+  try {
+    const posts = await Post.find().sort({ criado_em: -1 }).lean();
+    res.render('blog', { posts });
+  } catch (err) {
+    console.error('Erro ao buscar posts:'.red, err.message);
+    res.status(500).send('Erro no servidor');
+  }
+});
+
+app.get('/cadastrar_post', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'Atividade09', 'cadastrar_post.html'));
+});
+
+app.post('/cadastrar_post', async (req, res) => {
+  const { titulo, resumo, conteudo } = req.body;
+  try {
+    const novoPost = new Post({ titulo, resumo, conteudo });
+    await novoPost.save();
+    console.log('Post salvo no MongoDB:'.green, titulo);
+    res.redirect('/blog');
+  } catch (err) {
+    console.error('Erro ao salvar post:'.red, err.message);
+    res.status(500).send('Erro ao cadastrar');
+  }
+});
+
+
+var server = http.createServer(app);
+server.listen(80, '0.0.0.0', () => {
+  console.log("servidor rodando...".rainbow);
+});

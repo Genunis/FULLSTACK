@@ -1,0 +1,34 @@
+<%
+  title = "Cadastrar Usuário";
+%>
+<%- include('partials/header') %>
+
+<div class="projects-card">
+    <h2 class="projects-title">
+        <span>📝</span><span>C</span><span>a</span><span>d</span><span>a</span><span>s</span><span>t</span><span>r</span><span>o</span><span> </span><span>👤</span>
+    </h2>
+    <p><strong>Cadastrados até agora:</strong> <%= count %> / <%= max %></p>
+    
+    <% if (error) { %>
+        <div style="background:#ffe0e7; border-left:5px solid #F24472; padding:10px; margin-bottom:20px; border-radius:12px;">
+            <span style="color:#b33;"><%= error %></span>
+        </div>
+    <% } %>
+
+    <form action="/lab11/usuarios/cadastrar" method="POST" style="display:flex; flex-direction:column; gap:15px;">
+        <div>
+            <label for="name">Nome completo:</label>
+            <input type="text" name="name" id="name" value="<%= name %>" placeholder="Ex: Maria Silva" required style="width:100%; padding:12px; border-radius:30px; border:2px solid #A2CDF2; font-family:inherit;">
+        </div>
+        <div>
+            <label for="email">E-mail:</label>
+            <input type="email" name="email" id="email" value="<%= email %>" placeholder="exemplo@email.com" required style="width:100%; padding:12px; border-radius:30px; border:2px solid #A2CDF2; font-family:inherit;">
+        </div>
+        <button type="submit" class="btn-link" style="align-self:center; background:#F24472; color:white; border:none; padding:12px 30px; cursor:pointer;">✅ Cadastrar Usuário</button>
+    </form>
+    <div style="text-align:center; margin-top:20px;">
+        <a href="/lab11/usuarios" class="btn-link">📋 Ver lista de usuários</a>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

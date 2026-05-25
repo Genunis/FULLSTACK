@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Delius&family=Pacifico&display=swap" rel="stylesheet">
+  <title>Blog Fofo</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Delius', cursive;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #5D5D5D;
+      background-color: #FFF9FB;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 35px;
+      border: 3px solid #A2CDF2;
+      box-shadow: 0 10px 25px rgba(242, 68, 114, 0.1);
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #91BBF2;
+      text-align: center;
+      font-size: 2.8em;
+      margin-bottom: 30px;
+    }
+
+    .btn-novo {
+      display: inline-block;
+      margin-bottom: 25px;
+      background: white;
+      color: #F24472;
+      border: 2px solid #F24472;
+      padding: 10px 25px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .btn-novo:hover {
+      background-color: #F24472;
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 10px rgba(242, 68, 114, 0.3);
+    }
+
+    .post {
+      background: #FFF2F7;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-left: 5px solid #A2CDF2;
+    }
+
+    .post h2 {
+      font-family: 'Pacifico', cursive;
+      color: #F24472;
+      margin-top: 0;
+      font-size: 1.8em;
+    }
+
+    .post .resumo {
+      font-style: italic;
+      color: #A68A56;
+      margin-bottom: 10px;
+    }
+
+    .post .conteudo {
+      white-space: pre-wrap;
+    }
+
+    .post .data {
+      font-size: 0.8em;
+      color: #999;
+      margin-top: 10px;
+    }
+
+    .sem-posts {
+      text-align: center;
+      padding: 30px;
+      color: #A68A56;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📝 Blog Fofo</h1>
+    <a href="../../Atividade09/cadastrar_post.html" class="btn-novo">+ Novo Post</a>
+
+    <% if (posts && posts.length > 0) { %>
+      <% posts.forEach(post => { %>
+        <div class="post">
+          <h2><%= post.titulo %></h2>
+          <% if (post.resumo) { %>
+            <div class="resumo"><%= post.resumo %></div>
+          <% } %>
+          <div class="conteudo"><%- post.conteudo %></div>
+          <div class="data">Publicado em <%= new Date(post.criado_em).toLocaleString('pt-BR') %></div>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <div class="sem-posts">Nenhum post ainda. Seja o primeiro a escrever! 💕</div>
+    <% } %>
+  </div>
+</body>
+</html>

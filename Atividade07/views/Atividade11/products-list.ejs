@@ -1,0 +1,45 @@
+<%
+  title = "Lista de Produtos";
+%>
+<%- include('partials/header') %>
+
+<div class="projects-card">
+    <h2 class="projects-title">
+        <span>🛍️</span><span>P</span><span>r</span><span>o</span><span>d</span><span>u</span><span>t</span><span>o</span><span>s</span>
+    </h2>
+    <% if (showSuccess) { %>
+        <div style="background:#d4edda; border-left:5px solid #28a745; padding:10px; margin-bottom:20px; border-radius:12px;">
+            ✅ Produto cadastrado com sucesso!
+        </div>
+    <% } %>
+    
+    <p><strong><%= count %></strong> de <%= max %> produtos cadastrados.</p>
+    
+    <% if (products.length === 0) { %>
+        <p style="text-align:center;">✨ Nenhum produto ainda. <a href="/lab11/produtos/cadastrar">Cadastre o primeiro</a> ✨</p>
+    <% } else { %>
+        <div class="table-container">
+            <table class="projects-table">
+                <thead>
+                    <tr><th>ID</th><th>Nome</th><th>Preço</th><th>Descrição</th><th>Data</th></tr>
+                </thead>
+                <tbody>
+                    <% products.forEach(prod => { %>
+                        <tr>
+                            <td><%= prod.id %></td>
+                            <td><%= prod.name %></td>
+                            <td>R$ <%= prod.price.toFixed(2) %></td>
+                            <td><%= prod.description || '—' %></td>
+                            <td><%= prod.createdAt %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
+    <div style="text-align:center; margin-top:25px;">
+        <a href="/lab11/produtos/cadastrar" class="btn-link">➕ Novo Produto</a>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
