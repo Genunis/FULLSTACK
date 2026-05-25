@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Titillium+Web:wght@400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  background: #0e0e10;
+  color: #ddd;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Container principal */
+.container {
+  width: 95%;
+  max-width: 1100px;
+  margin: 30px auto;
+  background: rgba(20, 20, 25, 0.95);
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 0 30px rgba(229, 57, 53, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+/* Títulos */
+h1, h2, h3 {
+  font-family: 'Racing Sans One', cursive;
+  color: #e63946;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
+  text-shadow: 0 0 15px rgba(229, 57, 53, 0.6);
+}
+
+/* Cards e tabelas */
+.form-cadastro, .form-card {
+  background: #1a1a22;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #333;
+}
+
+th {
+  background: #e63946;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+tr:hover {
+  background: rgba(229, 57, 53, 0.1);
+}
+
+/* Botões */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: transparent;
+  color: #e63946;
+  border: 2px solid #e63946;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin: 4px;
+}
+
+.btn:hover {
+  background: #e63946;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(229, 57, 53, 0.5);
+}
+
+.btn-remover {
+  border-color: #ff4d4d;
+  color: #ff4d4d;
+}
+
+.btn-remover:hover {
+  background: #ff4d4d;
+  color: #fff;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Inputs */
+input, select {
+  padding: 10px 15px;
+  margin: 5px;
+  border: 1px solid #555;
+  border-radius: 20px;
+  background: #1a1a22;
+  color: #ddd;
+  font-family: inherit;
+  transition: border 0.3s;
+}
+
+input:focus {
+  outline: none;
+  border-color: #e63946;
+  box-shadow: 0 0 8px rgba(229, 57, 53, 0.3);
+}
+
+/* Links */
+a {
+  color: #e63946;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+/* Utilitários */
+.logout {
+  float: right;
+}
+
+.erro {
+  color: #ff4d4d;
+  margin-bottom: 15px;
+}
+
+.link {
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .container {
+    padding: 15px;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+}
+/* Ficha técnica do carro */
+.carro-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1a1a22;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  transition: transform 0.2s;
+}
+
+.carro-card:hover {
+  transform: scale(1.01);
+  border-color: #e63946;
+}
+
+.carro-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.carro-info h2 {
+  font-family: 'Racing Sans One', cursive;
+  color: #e63946;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.carro-especificacoes {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.spec-item {
+  background: #0e0e10;
+  border: 1px solid #333;
+  border-radius: 20px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #ddd;
+}
+
+.spec-item .label {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.spec-item .valor {
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.ano-valor {
+  color: #f1c40f; /* dourado para destacar o ano */
+}
+
+.qtde-valor {
+  color: #2ecc71; /* verde para quantidade disponível */
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.qtde-valor.baixo {
+  color: #e67e22; /* laranja para estoque baixo (1-2) */
+}
+
+.qtde-valor.esgotado {
+  color: #ff4d4d; /* vermelho quando zerado */
+}
+
+.esgotado-tag {
+  background: #ff4d4d;
+  color: white;
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.btn-vender {
+  display: inline-block;
+  padding: 10px 20px;
+  background: transparent;
+  color: #e63946;
+  border: 2px solid #e63946;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.btn-vender:hover {
+  background: #e63946;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(229, 57, 53, 0.5);
+}
+
+.btn-vender:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Delius&family=Pacifico&display=swap" rel="stylesheet">
+    <title>Novo Post</title>
+    <link rel="stylesheet" href="cadastrar_post.css">
+</head>
+<body>
+  <div class="form-card">
+    <h2>Novo Post</h2>
+    <form action="/lab09/cadastrar_post" method="POST">
+      <label>Título:</label>
+      <input type="text" name="titulo" required>
+      <label>Resumo:</label>
+      <input type="text" name="resumo">
+      <label>Conteúdo:</label>
+      <textarea name="conteudo" required></textarea>
+      <button type="submit">Publicar</button>
+    </form>
+    <a href="/lab09/blog" class="voltar">← Voltar para o blog</a>
+  </div>
+</body>
+</html>
+
