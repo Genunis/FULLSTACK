@@ -1,0 +1,20 @@
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F24472; /* Fundo rosa vibrante */
+    padding: 10px 20px;
+    border-radius: 50px 15px 50px 15px; /* Formato orgânico e fofo */
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.logo span {
+    font-size: 28px;
+    font-family: 'Pacifico', cursive;
+    color: #ffffff;
+    letter-spacing: 1px;
+}

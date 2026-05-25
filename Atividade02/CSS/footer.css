@@ -1,0 +1,32 @@
+.footer-fofo {
+    background-color: #A2CDF2; /* Azul claro da paleta */
+    border-top: 4px solid #F24472; /* Linha rosa vibrante */
+    padding: 40px 20px;
+    margin-left: -20px;
+    text-align: center;
+    width: 100%; 
+    margin-top: auto;   
+}
+
+.footer-content p {
+    font-family: 'Delius', cursive;
+    color: #5D5D5D;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.social-icons {
+    font-size: 24px;
+    letter-spacing: 15px;
+}
+
+.social-icons span {
+    transition: transform 0.3s ease;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.social-icons span:hover {
+    transform: scale(1.3) rotate(10deg);
+}

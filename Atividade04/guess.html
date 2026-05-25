@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivinhação</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Jogo da Adivinhação</h1>
+        <p>Estou pensando em um número entre 0 e 99. Tente adivinhar!</p>
+        <input type="number" id="guessInput" min="0" max="99" placeholder="Digite um número">
+        <button onclick="verificarPalpite()">Tentar</button>
+        
+        <div id="feedback"></div>
+    </div>
+
+    <script>
+        const numeroSecreto = Math.floor(Math.random() * 100);
+
+        function verificarPalpite() {
+            const input = document.getElementById('guessInput');
+            const palpite = Number(input.value);
+
+            const feedback = document.getElementById('feedback');
+
+            if (isNaN(palpite) || palpite < 0 || palpite > 99) {
+                feedback.textContent = 'Digite um número válido entre 0 e 99.';
+                feedback.style.color = 'black';
+                return;
+            }
+
+            if (palpite === numeroSecreto) {
+                feedback.textContent = `🎉 Parabéns! Você acertou! O número era ${numeroSecreto}.`;
+                feedback.style.setProperty('background-color', 'lightgreen');
+                feedback.style.color = 'black';
+            } else if (palpite < numeroSecreto) {
+                feedback.textContent = '📉 O número é MAIOR que seu palpite. Tente novamente.';
+                feedback.style.setProperty('background-color', 'red');
+                feedback.style.color = 'white';
+            } else {
+                feedback.textContent = '📈 O número é MENOR que seu palpite. Tente novamente.';
+                feedback.style.setProperty('background-color', 'red');
+                feedback.style.color = 'white';
+            }
+
+            input.value = '';
+            input.focus();
+        }
+    </script>
+</body>
+</html>

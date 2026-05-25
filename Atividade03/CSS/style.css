@@ -1,0 +1,157 @@
+/*    bisque
+    darkgreen
+    lightskyblue
+    lightgray
+    darkred
+    indigo
+    red
+    yellow
+*/
+body{
+    background-color: lightgray;
+    margin: 10px;
+    text-align: center;
+
+}
+
+#img-nav{
+    display: flex;
+    height:80pt;
+    justify-content:space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: bisque;
+    border: solid blue;
+}
+#img-nav img{
+    height: 70pt;
+}
+
+#img-nav h1{
+    color: darkgreen;
+    font-size: 40pt;
+    align-items: center;
+}
+.links-container{
+    display: flex;
+    height:50px;
+    justify-content:center;
+    align-items: center;
+    background-color: lightskyblue;
+    
+}
+.links-container a{
+    color: indigo; 
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 26pt;
+    font-weight: bold;
+    padding: 10px 18px;
+}
+
+.centroRoxo{
+    color: indigo; 
+    font-family: sans-serif;
+    font-size: 20pt;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+}
+
+
+.centro{
+    font-size: 25pt;
+    text-align: center;
+}
+
+h1{
+    justify-content:center;
+    align-items: center;
+    font-size: 25pt;
+}
+
+.livros-container *{
+    display: inline-block;
+    height: 300pt;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+.fei-container *{
+    display: inline-block;
+    height: 300pt;
+    width: 300pt;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+table{
+    border: dashed red;
+}
+thead{
+    color: red;
+    font-size: 14pt;
+    
+}
+td{
+    border: solid 1px red;
+    font-size: 12pt;
+}
+.contato-table{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.consulta{
+    width: 400pt;
+    height: 100pt;
+    background-color: yellow;
+    display: block;
+    margin: auto;
+    margin-bottom: 20pt;
+    text-align: left;
+}
+
+.consulta p{
+    text-align: start; 
+}
+.consulta a{
+    color: brown;
+    text-decoration: none;
+    text-align: justify;
+    padding-left: 40pt;
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.consulta li {
+    margin-bottom: 5px;
+    font-weight: bold;    /* O texto HTML, CSS e JS parece negrito */
+}
+
+
+footer{
+    background-color: bisque;
+    height: 80pt;
+    text-align: center;
+}
+#f-img{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#f-img p{
+    font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif;
+    font-size: 15pt;
+}
+#f-img img{
+    height: 60pt;
+    padding: 10pt;
+}
+
+.livros, .contato, .fei{
+    margin-top: 40pt;
+    margin-bottom: 20pt;
+
+}

@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Delius&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/style.css">
+    <title>Portfólio - Jeniffer Nicolly</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span>JVN</span>
+            </div>
+            <div class="links-container">
+                <a href="index.html">Home</a>
+                <a href="#Sobre">Sobre</a>
+                <a href="#Habilidades">Habilidades</a>
+                <a href="#Galeria">Galeria</a>
+                <a href="#Midias">Mídias</a>
+                <a href="/Atividade02/projects.html">Projetos</a>
+                <a href="#Contato">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="Sobre">
+        <h1>Jeniffer Nicolly Valentim Nunes</h1>
+        <h2>Sobre Mim</h2>
+        <p>Minha jornada na área de programação começou em 2020, quando me interessei pelo trabalho do meu pai e fiz um curso gratuito de Introdução a Programação de Computadores. Em seguida, fiz cursos de lógica de programação, criação de sites e um curso em parceria com a Samsung, onde desenvolvi uma fechadura eletrônica com Arduíno. Em 2022, fiz cursos de desenvolvimento web, codificação em Python e introdução à Inteligência Artificial. Um técnico em mecatrônica e comecei a fazer engenharia de automação e controle, mas a vida me fez parar mas não porque desistir eu somente adoeci e tive que tirar um tempo para o meu corpo e minha mente foi dificil parar tudo e agora eu sei como viver é maravilhoso.</p>
+        <p>Meu objetivo é ter a oportunidade de crescer profissionalmente, aprender mais e aplicar em prática tudo o que aprendi em sala de aula. Quero trabalhar em equipe e colaborar para o crescimento da minha carreira e da empresa que eu estiver envolvida.</p>
+        <p>A vida é difícil, mas desistir nunca será uma opção.</p>
+    </div>
+
+    <div id="Habilidades">
+        <h2>Minhas Habilidades</h2>
+        <ul>
+            <li>Javascript</li>
+            <li>HTML e CSS</li>
+            <li>Python</li>
+            <li>C++</li>
+            <li>MySQL</li>
+            <li>SQLITE</li>
+            <li>Mongodb</li>
+        </ul>
+    </div>
+
+    <!-- CARROSSEL DE IMAGENS -->
+    <div id="Galeria">
+        <h2>Galeria de Imagens</h2>
+        <div class="carrossel">
+            <div class="slides">
+                <img src="imagens/Samsung-senai.jpg" alt="Curso Samsung SENAI">
+                <img src="imagens/Samsung-senai2.jpg" alt="Mais um certificado Samsung SENAI">
+                <img src="imagens/sirius.jpg" alt="Projeto Sirius">
+                <img src="imagens/etec.jpg" alt="ETEC">
+                <img src="imagens/perfil.jpg" alt="Foto de Jeniffer">
+            </div>
+        </div>
+    </div>
+
+    <div id="Midias">
+        <h2>Onde estou & inspirações</h2>
+        <div class="iframes-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.2956791799997!2d-46.63811768449142!3d-23.55065078468685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59a00c3c0c2b%3A0x7a0a6c0c0c0c0c0c!2sAv.%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1616112111111" 
+                width="400" height="250" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+            <iframe width="400" height="250" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                title="Vídeo motivacional" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+            <iframe width="400" height="250" src="https://www.youtube.com/embed/KMxo3TMJxYY" 
+                title="Tutorial de HTML" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+    <footer class="footer-fofo" id="Contato">
+        <div class="footer-content">
+            <p>&copy; 2026 — Feito com ♡ por Jeniffer Nicolly</p>
+            <div class="social-icons">
+                <span>✨</span>
+                <span>🌸</span>
+                <span>💻</span>
+            </div>
+            <div class="contato-links">
+                <a href="https://github.com/Genunis" target="_blank">GitHub</a> 
+                <a href="https://www.linkedin.com/in/jeniffer-nicolly-valentim-nunes-623979ab/?" target="_blank">LinkedIn</a>             </div>
+        </div>
+    </footer>
+
+    <!-- Script do carrossel -->
+    <script src="js/nav.js"></script>
+    <script>
+        // Carrossel automático
+        const slides = document.querySelector('#Galeria .slides');
+        const imagens = slides.querySelectorAll('img');
+        let idx = 0;
+        const total = imagens.length;
+
+        function mostrarSlide(index) {
+            slides.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        // Avança automaticamente a cada 3 segundos
+        setInterval(() => {
+            idx = (idx + 1) % total;
+            mostrarSlide(idx);
+        }, 3000);
+    </script>
+</body>
+</html>

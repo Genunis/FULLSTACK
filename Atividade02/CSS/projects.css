@@ -1,0 +1,101 @@
+.projects-card {
+    background: white;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 40px;
+    border: 8px solid #A2CDF2; /* Azul claro da paleta */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.projects-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 3em;
+    margin-bottom: 30px;
+    color: #A2CDF2; /* Azul claro */
+    text-shadow: 2px 2px 0 rgba(242, 68, 114, 0.1); /* Sombra rosa bem leve */
+    position: relative;
+    top: -10px;
+}
+
+.projects-title span {
+    display: inline-block;
+    animation: bounce 1s infinite alternate;
+}
+.projects-title span:nth-child(2) { animation-delay: 0.1s; }
+.projects-title span:nth-child(3) { animation-delay: 0.2s; }
+.projects-title span:nth-child(4) { animation-delay: 0.3s; }
+.projects-title span:nth-child(5) { animation-delay: 0.4s; }
+.projects-title span:nth-child(6) { animation-delay: 0.5s; }
+.projects-title span:nth-child(7) { animation-delay: 0.6s; }
+.projects-title span:nth-child(8) { animation-delay: 0.7s; }
+.projects-title span:nth-child(9) { animation-delay: 0.8s; }
+.projects-title span:nth-child(10) { animation-delay: 0.9s; }
+.projects-title span:nth-child(11) { animation-delay: 1.0s; }
+.projects-title span:nth-child(12) { animation-delay: 1.1s; }
+.projects-title span:nth-child(13) { animation-delay: 1.2s; }
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
+
+.table-container {
+    overflow: hidden;
+    border-radius: 20px;
+    border: 3px solid #ff85a2;
+}
+
+.projects-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #FFF9FB;
+}
+
+.projects-table thead {
+    background-color: #ffb7d6; /* Rosa vibrante */
+    color: white;
+}
+
+.projects-table th {
+    padding: 15px;
+    font-family: 'Delius', cursive;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.projects-table td {
+    padding: 20px 15px;
+    border-bottom: 2px solid #ff85a2;
+    color: #5D5D5D;
+    font-family: 'Delius', cursive;
+}
+
+/* Estilo do Botão Visitar atualizado com a sua classe btn-link */
+.btn-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #F24472;
+    font-weight: 700;
+    border: 2px solid #F24472;
+    padding: 8px 15px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    background-color: white;
+    font-family: 'Delius', cursive;
+}
+
+.btn-link:hover {
+    background-color: #F24472;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(242, 68, 114, 0.2);
+}
+
+.icon-star { color: #A68A56; margin-right: 5px; } /* Dourado da paleta */
+.icon-heart { color: #ff69b4; margin-right: 5px; }
+
+tbody tr:nth-child(even) { background-color: #fff2f7; }
+tbody tr:nth-child(odd) { background-color: #fff9fc; }
